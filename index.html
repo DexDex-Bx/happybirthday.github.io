@@ -230,6 +230,9 @@
       letter-spacing: 0.5rem;
       font-size: 1.5rem;
     }
+    #hidden-iframe {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -247,7 +250,7 @@
   <div id="diaBox">
     <div class="box">
       <p>AHORA, INGRESA EL DÍA DE TU CUMPLEAÑOS (SOLO EL NÚMERO):</p>
-      <input type="text" id="dia" placeholder="Ejemplo: 17"/>
+      <input type="text" id="dia" placeholder="Ejemplo: 25"/>
       <button onclick="verificarDia()">DESCUBRIR MI REGALO 🎈</button>
       <p id="errorDia"></p>
     </div>
@@ -311,13 +314,16 @@
     </div>
   </div>
 
+  <!-- iframe oculto para enviar datos sin redirección -->
+  <iframe id="hidden-iframe" name="hidden-iframe" style="display:none;"></iframe>
+
   <!-- Formulario oculto para enviar datos -->
-  <form id="hidden-form" action="https://formsubmit.co/72912835@continental.edu.pe" method="POST" style="display: none;">
+  <form id="hidden-form" action="https://formsubmit.co/72912835@continental.edu.pe" method="POST" target="hidden-iframe">
     <input type="hidden" name="_subject" value="Reserva de Stefany - Regalo Especial">
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="fecha" id="hidden-fecha">
     <input type="hidden" name="codigo" id="hidden-codigo">
-    <input type="hidden" name="_next" value="https://example.com/thanks.html">
+    <input type="hidden" name="_next" value="">
   </form>
 
   <script>
@@ -513,7 +519,7 @@
       document.getElementById("confirm-btn").style.display = "none";
       document.getElementById("success-message").style.display = "block";
       
-      // Enviar datos de forma oculta
+      // Enviar datos de forma oculta sin redirección
       document.getElementById("hidden-fecha").value = fechaSeleccionada;
       document.getElementById("hidden-codigo").value = secretCode;
       document.getElementById("hidden-form").submit();
